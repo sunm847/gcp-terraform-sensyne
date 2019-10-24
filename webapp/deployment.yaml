@@ -1,1 +1,21 @@
-
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sensyne
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      run: sensyne
+  template:
+    metadata:
+      labels:
+        run: sensyne
+    spec:
+      containers:
+      - image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: sensyne
+        ports:
+        - containerPort: 80
+          protocol: TCP
