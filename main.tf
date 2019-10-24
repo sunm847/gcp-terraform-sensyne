@@ -3,13 +3,14 @@ resource "google_container_cluster" "default" {
   project     = "${var.project}"
   description = "Sensyne Cluster"
   location    = "${var.location}"
+  zone        = "us-west1-a"
 
   remove_default_node_pool = true 
   initial_node_count = "${var.initial_node_count}"
 
   master_auth {
-    username = ""
-    password = ""
+    username = "${var.admin_username}"
+    password = "${var.admin_password}"
 
     client_certificate_config {
       issue_client_certificate = false
@@ -31,9 +32,10 @@ resource "google_container_node_pool" "default" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
-
     oauth_scopes = [
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-    ]
+          "https://www.googleapis.com/auth/compute",
+          "https://www.googleapis.com/auth/devstorage.read_only",
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring",
+        ]
   }
