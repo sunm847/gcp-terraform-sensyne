@@ -1,10 +1,10 @@
 resource "google_container_cluster" "default" {
   name        = "${var.name}"
   project     = "${var.project}"
-  description = "Demo GKE Cluster"
+  description = "Sensyne Cluster"
   location    = "${var.location}"
 
-  remove_default_node_pool = true
+  remove_default_node_pool = true 
   initial_node_count = "${var.initial_node_count}"
 
   master_auth {
