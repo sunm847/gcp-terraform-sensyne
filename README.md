@@ -96,11 +96,11 @@ Grant the service account permission to create projects and assign billing accou
 # GCP variables used in terraform main.tf file - Refer to "variables.tf"
 path = gcp-terraform-sensyne/
 
-Outputs, once terraform will deploy new infrastructure we will need some outputs that we can reuse for GKE and SQL setup
+Outputs, once terraform will deploy new infrastructure we will need some outputs that we can reuse
 # project creation output - Refer to "outputs.tf" file
 path = gcp-terraform-sensyne/outputs.tf
 
-Finally main source of the gcloud project creation
+Finally main source of the project
 # Refer to "main.tf" file
 path = gcp-terraform-sensyne/main.tf
 
