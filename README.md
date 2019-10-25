@@ -127,3 +127,6 @@ First, authenticate to the cluster and run the below commands using kubectl:
 $ kubectl apply -f deployment.yaml
 $ kubectl apply -f service.yaml
 $ kubectl apply -f ingress.yaml
+
+NOTE:: Folder "deploydb" is for deploying PostgresSQL db using Kubernetes with Docker Image.
+
