@@ -1,5 +1,6 @@
-# gcp-webapp-sqldb-terraform-sensyne
+# gcp-webapp-sqldb-terraform-kubernetes
   Sensyne assignment
+  We will create a GCP project and setup environment for terraform, kubernetes.
 # Setup gcloud, kubectl and terraform
   Have Google Cloud account and need additional binaries for gcloud CLI, terraform and kubectl. Gcloud deployment differs from Linux distribution and for OSX. Here we will use Linux.
 
