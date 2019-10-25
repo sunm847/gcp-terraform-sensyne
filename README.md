@@ -1,5 +1,5 @@
 # gcp-webapp-sqldb-terraform-sensyne
-  Created Repo for Sensyne assignment
+  Sensyne assignment
 # Setup gcloud, kubectl and terraform
   Have Google Cloud account and need additional binaries for gcloud CLI, terraform and kubectl. Gcloud deployment differs from Linux distribution and for OSX. Here we will use Linux.
 
@@ -90,37 +90,10 @@ Grant the service account permission to create projects and assign billing accou
   --member serviceAccount:terraform@${TF_ADMIN}.iam.gserviceaccount.com \
   --role roles/billing.user
 
-# Creating back-end storage to tfstate file in Cloud Storage
-
-Terraform stores the state about infrastructure and configuration by default local file "terraform.tfstate. State is used by Terraform to map resources to configuration, track metadata.
-
-Terraform allows state file to be stored remotely, which works better in a team environment or automated deployments. We will used Google Storage and create new bucket where we can store state files.
-
-Create the remote back-end bucket in Cloud Storage for storage of the terraform.tfstate file
-
-  gsutil mb -p ${TF_ADMIN} -l asia-southeast1 gs://${TF_ADMIN}
-
-Enable versioning for said remote bucket:
-
-  gsutil versioning set on gs://${TF_ADMIN}
-
-Configure your environment for the Google Cloud terraform provider
-
-  export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
-
-1st step is to keep sensitive information outside external git repository. Best practice is to create terraform.tfvars and keep sensitive information and add .tfvars to .gitignore
-.gitignore
-*.tfstate
-*.tfstate.backup
-*.tfvars
-.terraform
-tfplan
-
 # use newly created Google storage bucket to keep our tfstate files
  bucket name = "Sensyne-admin-demo"
  
-Variable used in terraform main.tf file
-# GCP variables - Refer to "variables.tf"
+# GCP variables used in terraform main.tf file - Refer to "variables.tf"
 path = gcp-terraform-sensyne/
 
 Outputs, once terraform will deploy new infrastructure we will need some outputs that we can reuse for GKE and SQL setup
@@ -143,33 +116,7 @@ terraform plan
 Apply terraform plan for selected environment
 terraform apply
 
-Creating Kubernetes cluster on GKE and PostgreSQL on Cloud SQL
-
-Code structure
-
-│── firewall
-│   ├── main.tf
-│   └── variables.tf
-│── subnet
-│   ├── main.tf
-│   ├── outputs.tf
-│   └── variables.tf
-│── vpc
-│   ├── main.tf
-│   └── outputs.tf
-├── storage.tf
-├── cloudsql
-│   ├── main.tf
-│   ├── outputs.tf
-│   └── variables.tf
-
-├── main.tf
-├── outputs.tf
-└── variables.tf
-
-In order to keep our code clean I decided to use modules for every segment Networking(vpc, subnets and firewall) and cloudsql. All this modules can be maintained in separate git folders and can be called by root main.tf file.
-
-main.tf
+Creating Kubernetes cluster on GKE and PostgreSQL on Cloud SQLmain.tf
 
 # Use the below files to Launch Demo Application 
 Path = gcp-terraform-sensyne/webapp/
